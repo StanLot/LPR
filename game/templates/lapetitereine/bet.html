@@ -1,0 +1,27 @@
+{% csrf_token %}
+{% load static %}
+{% load humanize %}
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Ma petite Reine</title>
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" type="text/css" href="{% static 'game/style.css' %}" />
+	</head>
+	<body>
+      {% include "includes/menu.html" %}
+    <div id="content">
+      <h3> Il vous reste {{money|intcomma}} $ pour engager des coureurs </h3>
+      <form  method="post">
+          {% csrf_token %}
+          <label for="your_name">Ton enchère pour {{cyclist.name}} (minimum: {{cyclist.salary|intcomma}} $): </label>
+          <div>
+          {{bet_form}}
+          <input type="submit" value="Enchérir">
+          </div>
+      </form>
+    </div>
+	</body>
+</html>

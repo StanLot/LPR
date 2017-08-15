@@ -1,0 +1,55 @@
+{% load static %}
+{% load humanize %}
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Ma petite Reine</title>
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" type="text/css" href="{% static 'game/style.css' %}" />
+	</head>
+	<body>
+      {% include "includes/menu.html" %}
+		</div>
+
+    <h2> This is: {{league.name}}</h2>
+
+    <h3> Nous sommes à l'étape d'enchère n° {{league.step}} </h3>
+
+    <h3> Il vous reste {{money|intcomma}} $ pour engager des coureurs </h3>
+
+
+    <div id="content">
+      <div id="left-part">
+        <h3>Choisir tes coureurs</h3>
+        <ul>
+          <div>
+                nom: enchère minimum
+          </div>
+					<table>
+		        {% for cyclist in list_of_cyclist %}
+		            <li>
+		                <label for="price" >{{cyclist.name }}: {{cyclist.salary|intcomma}} $ </label>
+		                <a href ="/game/league/{{league.id}}/{{cyclist.id}}"><input type="submit" value="Enchérir"></a>
+		            </li>
+		        {% endfor %}
+			</table>
+        </ul>
+      </div>
+      <div id="right-part">
+        {% if league.id_creator_id == user.id %}
+            Passez à l'étape suivante:
+            <a href ="/game/league/{{league.id}}/passage_round/"><input type="submit" value="Go !"></a>
+        {% endif %}
+        <h3>Offres en cours</h3>
+        {% for cyclist in list_of_bet %}
+            <li>
+              <label for="your_name">{{cyclist.name }}: {{cyclist.price|intcomma}} $ </label>
+							<a href ="cancel_offer/{{cyclist.id}}"><input type="submit" value="Annuler"></a>
+            </li>
+        {% endfor %}
+      </div>
+    </div>
+	</body>
+</html>

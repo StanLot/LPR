@@ -1,0 +1,32 @@
+{% load static %}
+{% load render_table from django_tables2 %}
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Ma petite Reine</title>
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" type="text/css" href="{% static 'game/style.css' %}" />
+	</head>
+	<body>
+      {% include "includes/menu.html" %}
+		</div>
+
+    <h2> This is: {{league.name}}</h2>
+
+    <h3> Classement provisoire de la league </h3>
+
+    <div id="content">
+      <div id="left-part">
+        <ul>
+					{% for player in list_of_player %}
+							<li>
+									<label for="price" >{{player.name}}: {{player.point}}</label>
+							</li>
+					{% endfor %}
+        </ul>
+      </div>
+    </div>
+	</body>
+</html>

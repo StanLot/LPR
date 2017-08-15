@@ -1,0 +1,50 @@
+{% load static %}
+{% load humanize %}
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Ma petite Reine</title>
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" type="text/css" href="{% static 'game/style.css' %}" />
+	</head>
+	<body>
+      {% include "includes/menu.html" %}
+		</div>
+
+    <h2> This is: {{league.name}}</h2>
+
+    <h3> Nous sommes à l'étape d'enchère n° {{league.step}} </h3>
+
+    <h3> Nous sommes en attente des autres joueurs avant de commencer les enchères</h3>
+
+    <div>
+      Attends que le créateur de la league valide pour commencer les enchères
+    </div>
+    <div>
+    {% if league.id_creator_id == user.id %}
+        Le code de la league à transmettre à tes potes pour qu'ils s'inscrivent est: {{league.reference}}
+    {% endif %}
+    </div>
+    <div>
+    {% if league.id_creator_id == user.id %}
+        Passez à l'étape suivante et ne jouer qu'avec les joueur actuels:
+        <a href ="/game/league/{{league.id}}/passage_round/"><input type="submit" value="Go !"></a>
+    {% endif %}
+    </div>
+    <div id="content">
+        <h3>Joueurs inscrits pour le moment:</h3>
+        <ul>
+					<table>
+		        {% for player in list_of_player %}
+		            <li>
+		                <label>{{player.name}}</label>
+		            </li>
+		        {% endfor %}
+			    </table>
+        </ul>
+      </div>
+    </div>
+	</body>
+</html>
